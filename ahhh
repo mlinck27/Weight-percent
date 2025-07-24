@@ -1,0 +1,16 @@
+ggplot(LC_Carbon, aes(x = depth_cm_1, y = d13C_carb_org, color = ID)) +
+    geom_path() +
+    geom_point() +
+    coord_flip() +
+    scale_x_reverse() +
+    scale_color_manual(
+        name = "LC Cores",
+        values = c(
+            "LC13" = "darkseagreen3",
+            "LC15" = "paleturquoise2",
+            "LC16" = "darkgoldenrod1",
+            "LC19" = "coral")) +
+    labs(
+        x = "Depth (cm)",
+        y = "δ¹³C-Org C (‰)") +
+    theme_minimal()
