@@ -1,0 +1,11 @@
+ggplot(data = filter(dflong, Sample_ID == "LC19"), aes(fill=component, y=percent, x=depth_cm_1)) + 
+    geom_bar(position="fill", stat="identity") +
+    scale_x_reverse() +
+    coord_flip() +
+    scale_fill_manual(
+        name = "Component",
+        values = c("Carbonate" = "lightsteelblue2",
+                   "Organic_C" = "salmon4", 
+                   "Residue" = "goldenrod1")) +
+    labs(title = "LC19", x = "Depth (cm)", y = "Percent") +
+    theme_minimal()
