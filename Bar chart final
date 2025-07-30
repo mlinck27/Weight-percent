@@ -1,0 +1,12 @@
+ggplot(df_long, aes(x = depth_cm_1, y = Value, fill = Component)) +
+    geom_bar(stat = "identity", position = "stack", width = 3) +
+    coord_flip() +
+    scale_x_reverse() +
+    scale_fill_manual(
+        name = "Component",
+        values = c("Carbonate" = "lightsteelblue1",
+                   "Organic_C" = "darkblue", 
+                   "Residue" = "skyblue2")) +
+    facet_grid(. ~ Sample_ID, scales = "free_x", space = "free_x") +
+    labs(x = "Depth (cm)", y = "Percent", fill = "Component") +
+    theme_minimal()
