@@ -1,3 +1,9 @@
+df_long <- LC_Carbon %>%
+    pivot_longer(
+        cols = c(Organic_C, Residue, Carbonate),
+        names_to = "Component",
+        values_to = "Value"
+    )
 ggplot(data = filter(dflong, Sample_ID == "LC19"), aes(fill=component, y=percent, x=depth_cm_1)) + 
     geom_bar(position="fill", stat="identity") +
     scale_x_reverse() +
@@ -8,4 +14,23 @@ ggplot(data = filter(dflong, Sample_ID == "LC19"), aes(fill=component, y=percent
                    "Organic_C" = "salmon4", 
                    "Residue" = "goldenrod1")) +
     labs(title = "LC19", x = "Depth (cm)", y = "Percent") +
+    theme_minimal()
+ggplot(data = dplyr::filter(df_long, Sample_ID == "LC13"), aes(fill=Component, y=Value, x=depth_cm_1)) + 
+    geom_bar(position="fill", stat="identity") +
+    scale_x_reverse() +
+    coord_flip() +
+    scale_fill_manual(
+        name = "Component",
+        values = c("Carbonate" = "lightsteelblue2",
+                   "Organic_C" = "salmon4", 
+                   "Residue" = "goldenrod1")) +
+    labs(title = "LC13", x = "Depth (cm)", y = "Percent") +
+    theme_minimal()
+ggplot(df_long, aes(x = depth_cm_1, y = Value, fill = Component)) +
+    geom_bar(stat = "identity", position = "stack", width = 1) +
+    coord_flip() +
+    scale_x_reverse() +
+    scale_fill_manual
+    facet_grid(. ~ Sample_ID, scales = "free_x", space = "free_x") +
+    labs(x = "Depth (cm)", y = "Percent", fill = "Component") +
     theme_minimal()
